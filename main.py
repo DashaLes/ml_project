@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from sentence_transformers import SentenceTransformer, util
+from sentence_transformers import SentenceTransformer
 
 class Item(BaseModel):
     query: str  #Приняли текст
@@ -16,7 +16,7 @@ def root():
 @app.post("/predict/")
 def predict(item: Item):
 
-    model = SentenceTransformer('sentence-transformers/multi-qa-MiniLM-L6-cos-v1')
+    model = SentenceTransformer('sentence-transformers/distiluse-base-multilingual-cased-v2')
 
     query_emb = model.encode(item.query)    #Закодировали текст
     doc_emb = model.encode(item.docs)       #Закодировали массив
