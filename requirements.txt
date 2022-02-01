@@ -1,3 +1,4 @@
 sentence-transformers
 fastapi
 uvicorn
+torch==1.9.0+cpu
