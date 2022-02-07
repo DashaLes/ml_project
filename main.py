@@ -4,7 +4,7 @@ from sentence_transformers import SentenceTransformer, util
 
 class Item(BaseModel):
     query: str  #Приняли текст
-    docs: list  #Приняли массив
+    docs: list  #Приняли список
 
 app = FastAPI()
 
