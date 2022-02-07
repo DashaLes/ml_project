@@ -25,7 +25,7 @@ def predict(item: Item):
     model = SentenceTransformer('sentence-transformers/distiluse-base-multilingual-cased-v2')
 
     query_emb = model.encode(item.query)    #Закодировали текст
-    doc_emb = model.encode(item.docs)       #Закодировали массив
+    doc_emb = model.encode(item.docs)       #Закодировали список
 
     scores = util.dot_score(query_emb, doc_emb)[0].cpu().tolist()   #Применили модель
 
