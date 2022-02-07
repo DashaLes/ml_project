@@ -4,22 +4,28 @@ from sentence_transformers import SentenceTransformer, util
 
 class Item(BaseModel):
     query: str  #Приняли текст
-    docs: list  #Приняли массив
+    docs: list  #Приняли список
 
 app = FastAPI()
 
 
 @app.get("/")
 def root():
+    """Возвращает \"Hello World\""""
     return {"message": "Hello World"}
 
 @app.post("/predict/")
 def predict(item: Item):
+    """\"query\" принимает строку. \"docs\" принимает список строк для анализа сходства с \"query\". Функция возвращает список, в котором хранятся строки и результаты их анализов."""
+    
+    for elem in item.docs:
+        if (isinstance(elem, str) != True):
+            return {"error": "Список \"docs\" должен состоять из строк"}
 
-    model = SentenceTransformer('sentence-transformers/multi-qa-MiniLM-L6-cos-v1')
+    model = SentenceTransformer('sentence-transformers/distiluse-base-multilingual-cased-v2')
 
     query_emb = model.encode(item.query)    #Закодировали текст
-    doc_emb = model.encode(item.docs)       #Закодировали массив
+    doc_emb = model.encode(item.docs)       #Закодировали список
 
     scores = util.dot_score(query_emb, doc_emb)[0].cpu().tolist()   #Применили модель
 
