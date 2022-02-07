@@ -16,7 +16,7 @@ def root():
 
 @app.post("/predict/")
 def predict(item: Item):
-    """\"query\" принимает строку\n\"docs\" принимает массив строк для анализа сходства с \"query\""""
+    """\"query\" принимает строку\n\"docs\" принимает список строк для анализа сходства с \"query\"\nФункция возвращает список, в котором хранятся строки и результаты их анализов"""
 
     model = SentenceTransformer('sentence-transformers/distiluse-base-multilingual-cased-v2')
 
