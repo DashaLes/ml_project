@@ -11,10 +11,12 @@ app = FastAPI()
 
 @app.get("/")
 def root():
+    """Возвращает \"Hello World\""""
     return {"message": "Hello World"}
 
 @app.post("/predict/")
 def predict(item: Item):
+    """\"query\" принимает строку\n\"docs\" принимает массив строк для анализа сходства с \"query\""""
 
     model = SentenceTransformer('sentence-transformers/distiluse-base-multilingual-cased-v2')
 
