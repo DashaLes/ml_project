@@ -19,6 +19,10 @@ def predict(item: Item):
     """\"query\" принимает строку."""
     """\"docs\" принимает список строк для анализа сходства с \"query\"."""
     """Функция возвращает список, в котором хранятся строки и результаты их анализов."""
+    
+    for elem in item.docs:
+        if (isinstance(elem, str) != True):
+            return {"error": "Список \"docs\" должен состоять из строк"}
 
     model = SentenceTransformer('sentence-transformers/distiluse-base-multilingual-cased-v2')
 
